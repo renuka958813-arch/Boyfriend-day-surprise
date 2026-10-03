@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffedf3">
+<title>For My Favourite Person 💌</title>
+<style>
+  :root { --pink:#ff5d91; --deep:#b51f58; --ink:#52243a; --cream:#fff8fb; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    margin:0; min-height:100vh; overflow-x:hidden; color:var(--ink);
+    font-family: Georgia, "Times New Roman", serif;
+    background: radial-gradient(circle at top left,#fff 0,#ffeaf2 42%,#ffd7e5 100%);
+  }
+  .sparkle { position:fixed; inset:0; pointer-events:none; opacity:.45;
+    background-image:radial-gradient(#fff 1.2px,transparent 1.2px);
+    background-size:32px 32px; z-index:0; }
+  .wrap { position:relative; z-index:1; width:min(92%,700px); margin:0 auto; padding:38px 0 54px; text-align:center; }
+  .eyebrow { font:700 11px/1.4 Arial,sans-serif; letter-spacing:3px; text-transform:uppercase; color:#bd4775; }
+  h1 { font-size:clamp(34px,8vw,57px); line-height:1.05; margin:15px 0 10px; color:#a51f53; }
+  .subtitle { font:15px/1.7 Arial,sans-serif; color:#85536a; margin:0 auto 24px; max-width:440px; }
+  .envelope-area { min-height:260px; display:flex; align-items:center; justify-content:center; }
+  .envelope { position:relative; width:230px; height:155px; border:0; cursor:pointer; background:transparent; padding:0; filter:drop-shadow(0 14px 15px #b51f5826); transition:transform .25s ease; }
+  .envelope:hover { transform:translateY(-5px) rotate(-1deg); }
+  .env-body { position:absolute; inset:25px 0 0; background:#ff8bb0; border-radius:8px; overflow:hidden; }
+  .env-body:before,.env-body:after { content:""; position:absolute; bottom:-1px; width:0;height:0;border-style:solid; }
+  .env-body:before { left:0;border-width:75px 115px 0 0;border-color:transparent #ffb1c9 transparent transparent; }
+  .env-body:after { right:0;border-width:75px 0 0 115px;border-color:transparent transparent transparent #ff9cba; }
+  .flap { position:absolute; top:25px; left:0; width:0;height:0;border-left:115px solid transparent;border-right:115px solid transparent;border-top:80px solid #ff6f9d; transform-origin:top; z-index:3; transition:transform .7s ease; }
+  .seal { position:absolute; z-index:4; left:50%; top:82px; transform:translateX(-50%); width:44px;height:44px;border-radius:50%;background:#bd285e;color:white;display:grid;place-items:center;font-size:23px;box-shadow:0 4px 8px #8d17432c; }
+  .letter { position:absolute; z-index:2; left:17px; right:17px; top:37px; height:100px; background:#fffafc; border-radius:5px; display:flex; align-items:center; justify-content:center; font:700 13px Arial,sans-serif; letter-spacing:1px; color:#b52a60; }
+  .envelope.open .flap { transform:rotateX(180deg); z-index:1; }
+  .envelope.open .letter { animation:letterUp .8s .15s forwards; }
+  .envelope.open .seal { opacity:0; transition:opacity .2s; }
+  @keyframes letterUp { to { transform:translateY(-48px); } }
+  .open-btn { border:0; border-radius:999px; background:linear-gradient(135deg,#ff6f9d,#d92e70); color:white; padding:15px 28px; font:700 14px Arial,sans-serif; letter-spacing:.5px; box-shadow:0 8px 20px #c72a6540; cursor:pointer; transition:transform .2s,box-shadow .2s; }
+  .open-btn:hover { transform:translateY(-2px); box-shadow:0 11px 24px #c72a6550; }
+  .hint { font:12px Arial,sans-serif; color:#a56b82; margin:14px 0 0; }
+  #letter-content { display:none; text-align:left; margin:38px auto 0; animation:fadeIn .9s ease both; }
+  #letter-content.visible { display:block; }
+  @keyframes fadeIn { from {opacity:0;transform:translateY(18px)} to {opacity:1;transform:translateY(0)} }
+  .card { background:#ffffffd9; border:1px solid #ffffff; border-radius:22px; padding:clamp(22px,5vw,38px); box-shadow:0 18px 45px #a32d5a12; }
+  .card h2 { text-align:center; font-size:clamp(26px,6vw,38px); color:#ad2359; line-height:1.15; margin:0 0 8px; }
+  .card .small { text-align:center; font:12px Arial,sans-serif; letter-spacing:1.5px; color:#c34b7b; margin:0 0 25px; }
+  .message { font-size:17px; line-height:1.9; color:#60334a; }
+  .message p { margin:0 0 17px; }
+  .signoff { text-align:center; font-size:21px; line-height:1.7; color:#ad2359; margin-top:25px; }
+  .heart-row { text-align:center; font-size:25px; letter-spacing:8px; margin:25px 0 0; }
+  .footer { margin-top:26px; text-align:center; font:12px/1.8 Arial,sans-serif; color:#a56b82; }
+  .floating-heart { position:fixed; bottom:-30px; z-index:5; pointer-events:none; animation:floatUp 3.8s ease-in forwards; }
+  @keyframes floatUp { 0%{transform:translateY(0) rotate(0deg);opacity:0} 12%{opacity:.95} 100%{transform:translateY(-110vh) rotate(28deg);opacity:0} }
+  .reopen { display:none; margin:20px auto 0; background:transparent; border:1px solid #e9a0ba; border-radius:999px; padding:10px 17px; color:#a51f53; cursor:pointer; font:13px Arial,sans-serif; }
+  @media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation-duration:.01ms!important; transition-duration:.01ms!important; scroll-behavior:auto!important; } }
+</style>
+</head>
+<body>
+<div class="sparkle"></div>
+<main class="wrap">
+  <div class="eyebrow">A tiny surprise, made with love</div>
+  <h1>For My Favourite Person <span aria-hidden="true">♡</span></h1>
+  <p class="subtitle">There’s a little piece of my heart waiting for you inside. Open it when you’re ready, babyyy. 🥹</p>
+  <div class="envelope-area">
+    <button class="envelope" id="envelope" aria-label="Open the love letter">
+      <span class="letter">A LITTLE LOVE NOTE FOR YOU</span>
+      <span class="env-body"></span><span class="flap"></span><span class="seal">♥</span>
+    </button>
+  </div>
+  <button class="open-btn" id="openBtn">Open Me 💌</button>
+  <p class="hint" id="hint">Psst… tap the button to open your surprise ✨</p>
+
+  <section id="letter-content" aria-live="polite">
+    <div class="card">
+      <h2>Happy Boyfriend Day! ❤️</h2>
+      <p class="small">TO MY FAVOURITE HUMAN, ALWAYS</p>
+      <div class="message">
+        <p>Happyyy Boyfriend Day to my favourite person in the whole world! 🥹❤️🫶🏻</p>
+        <p>You mean so much more to me than words can ever explain. ❤️🥹 You’ve become such a beautiful part of my life, and I honestly can’t imagine my days without you. You’re my happiness, my comfort, and my favourite part of every day. 🫶🏻💗</p>
+        <p>If my heart had to find you a thousand times, it would find its way back to you every single time. No matter what life brings, I want to stand by your side and remind you, even on the days when you feel difficult to love, how precious you are to me. 🫂❤️</p>
+        <p>My heart doesn’t want anyone else; it’s you I want, you I choose, and you I’ll keep choosing, in every lifetime. No one could ever take your place in my heart. 🧿💋 I’m so grateful to have you, and I hope I get to love you for a very, very long time. ❤️</p>
+        <p>I wish I could hug you right now and tell you all of this while looking into your eyes. 🥹🫂❤️ Just remember, you’ll always be my favourite person. I love you so much, babu. 🧿💋❤️</p>
+      </div>
+      <div class="heart-row" aria-hidden="true">♡ ♥ ♡</div>
+      <div class="signoff">Forever sending you hugs,<br><strong>Your girl 💗</strong></div>
+    </div>
+    <button class="reopen" id="reopenBtn">Read my note again 💌</button>
+  </section>
+  <div class="footer">Made with a little blush, a lot of love, and you in mind. 💗</div>
+</main>
+<script>
+  const envelope = document.getElementById('envelope');
+  const openBtn = document.getElementById('openBtn');
+  const content = document.getElementById('letter-content');
+  const hint = document.getElementById('hint');
+  const reopenBtn = document.getElementById('reopenBtn');
+  let opened = false;
+  function hearts() {
+    const symbols = ['💗','💕','💖','♡','❤️','💘'];
+    for (let i=0; i<22; i++) {
+      const heart = document.createElement('span');
+      heart.className = 'floating-heart';
+      heart.textContent = symbols[Math.floor(Math.random()*symbols.length)];
+      heart.style.left = (Math.random()*96+2)+'vw';
+      heart.style.fontSize = (16+Math.random()*22)+'px';
+      heart.style.animationDuration = (2.8+Math.random()*2.2)+'s';
+      heart.style.animationDelay = (Math.random()*.8)+'s';
+      document.body.appendChild(heart);
+      heart.addEventListener('animationend', () => heart.remove());
+    }
+  }
+  function openLetter() {
+    if (opened) { content.scrollIntoView({behavior:'smooth',block:'start'}); hearts(); return; }
+    opened = true;
+    envelope.classList.add('open');
+    openBtn.textContent = 'Your surprise is open ❤️';
+    openBtn.disabled = true;
+    openBtn.style.opacity = '.75';
+    hint.textContent = 'A little love, just for you. 🥹';
+    content.classList.add('visible');
+    reopenBtn.style.display = 'block';
+    hearts();
+    setTimeout(() => content.scrollIntoView({behavior:'smooth',block:'start'}), 450);
+  }
+  openBtn.addEventListener('click', openLetter);
+  envelope.addEventListener('click', openLetter);
+  reopenBtn.addEventListener('click', () => { hearts(); content.scrollIntoView({behavior:'smooth',block:'start'}); });
+</script>
+</body>
+</html>
